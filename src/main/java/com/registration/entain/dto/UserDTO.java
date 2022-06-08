@@ -1,11 +1,10 @@
-package dto;
+package com.registration.entain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.Date;
 
 @Getter
@@ -14,13 +13,15 @@ import java.util.Date;
 @AllArgsConstructor
 public class UserDTO {
 
-    private Long Id;
-
     private String firstName;
 
     private String lastName;
 
     private String email;
+
+    private String confirmEmail;
+
+    private String confirmPassword;
 
     //For example only. In production must be char[]
     private String password;
