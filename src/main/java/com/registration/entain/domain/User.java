@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -37,9 +38,9 @@ public class User {
     @Column(name = "PASSWORD", nullable = false, length = 264)
     private String password;
 
-    @Column(name = "BIRTHDAY")
-    @JsonFormat(pattern = "dd.MM.yyyy")
-    private Date birthday;
+    @Column(name = "BIRTHDATE")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date birthdate;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
