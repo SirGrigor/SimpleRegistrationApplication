@@ -4,6 +4,8 @@
     <meta charset="ISO-8859-1">
     <title>Registration Success</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
@@ -18,7 +20,7 @@
                     class="icon-bar"></span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" th:href="@{/}">Registration and
+            <a class="navbar-brand" href="#" th:href="@{/index}">Registration and
                 Login Module</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
@@ -36,8 +38,7 @@
         <div class="col-md-6 col-md-offset-3">
 
             <div th:if="${param.success}">
-                <div class="alert alert-info">You've successfully registered
-                    to our awesome app!</div>
+                <div class="alert alert-info">You have registered</div>
             </div>
 
             <h1>Registration</h1>
@@ -63,6 +64,18 @@
                        th:each="error : ${#fields.errors('lastName')}"
                        th:text="${error}">Validation error</p>
                 </div>
+
+                <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
+                    <label for="birthdate">Date of birth</label>
+                    <div class="input-group date">
+                        <input type="text" class="form-control" id="birthdate" autocomplete="off"
+                               th:field="*{birthdate}"/>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
                     <label for="email" class="control-label">E-mail</label> <input
@@ -113,5 +126,14 @@
         th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
 <script type="text/javascript"
         th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+<script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+<script>
+    $('.input-group.date').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
 </body>
 </html>
