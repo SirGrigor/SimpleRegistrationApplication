@@ -8,10 +8,14 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
-    List<User> findAllUsers();
     User findByEmail(String email);
 
-    User save(UserDTO registration);
+    User save(UserDTO UserDTO);
 
-    Boolean existsByEmail(String email);
+    void updateUser(Long id, UserDTO userDTO);
+
+    UserDTO findById(Long id);
+
+    String getCurrentLoggedInUser();
+
 }
