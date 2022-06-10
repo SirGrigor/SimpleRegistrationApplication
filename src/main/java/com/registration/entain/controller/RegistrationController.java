@@ -43,17 +43,4 @@ public class RegistrationController {
         return "redirect:/registration?success";
     }
 
-    @PatchMapping
-    public String updateUser(@ModelAttribute("user")  UserDTO userDto, BindingResult result){
-
-        if (userService.existsByEmail(userDto.getEmail())) {
-            userService.save(userDto);
-            return "index";
-        } else if (result.hasErrors()) {
-            return "index";
-        }
-
-        userService.save(userDto);
-        return "redirect:/index?success";
-    }
 }
