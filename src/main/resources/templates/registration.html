@@ -3,11 +3,16 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Registration Success</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
-    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
+
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -51,7 +56,7 @@
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
                     <label for="firstName" class="control-label">First name</label> <input
-                        id="firstName" class="form-control" th:field="*{firstName}" />
+                        id="firstName" class="form-control" th:field="*{firstName}"/>
                     <p class="error-message"
                        th:each="error: ${#fields.errors('firstName')}"
                        th:text="${error}">Validation error</p>
@@ -59,27 +64,15 @@
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
                     <label for="lastName" class="control-label">Last name</label> <input
-                        id="lastName" class="form-control" th:field="*{lastName}" />
+                        id="lastName" class="form-control" th:field="*{lastName}"/>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('lastName')}"
                        th:text="${error}">Validation error</p>
                 </div>
-
-                <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
-                    <label for="birthdate">Date of birth</label>
-                    <div class="input-group date">
-                        <input type="text" class="form-control" id="birthdate" autocomplete="off"
-                               th:field="*{birthdate}"/>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
                     <label for="email" class="control-label">E-mail</label> <input
-                        id="email" class="form-control" th:field="*{email}" />
+                        id="email" class="form-control" th:field="*{email}"/>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation
                         error</p>
@@ -88,7 +81,7 @@
                      th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
                     <label for="confirmEmail" class="control-label">Confirm
                         e-mail</label> <input id="confirmEmail" class="form-control"
-                                              th:field="*{confirmEmail}" />
+                                              th:field="*{confirmEmail}"/>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('confirmEmail')}"
                        th:text="${error}">Validation error</p>
@@ -97,24 +90,34 @@
                      th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
                     <label for="password" class="control-label">Password</label> <input
                         id="password" class="form-control" type="password"
-                        th:field="*{password}" />
+                        th:field="*{password}"/>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('password')}"
                        th:text="${error}">Validation error</p>
                 </div>
                 <div class="form-group"
                      th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
-                    <label for="confirmPassword" class="control-label">Confirm
-                        password</label> <input id="confirmPassword" class="form-control"
-                                                type="password" th:field="*{confirmPassword}" />
+                    <label for="confirmPassword" class="control-label">Confirm password</label>
+                    <input id="confirmPassword" class="form-control" type="password" th:field="*{confirmPassword}"/>
                     <p class="error-message"
                        th:each="error : ${#fields.errors('confirmPassword')}"
                        th:text="${error}">Validation error</p>
                 </div>
+
+                <div class="form-group">
+                    <label for="birthdate">Birthday</label>
+                    <div class="input-group date" data-date-format="dd/mm/yyyy">
+                        <input class="form-control" type="date" th:field="*{birthdate}" th:errorclass="is-invalid" id="birthdate" placeholder="dd/mm/yyyy" />
+                        <div class="input-group-addon input-group-append">
+                            <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                    <span th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}" class="error"></span>
+                </div>
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Register</button>
-                    <span>Already registered? <a href="/" th:href="@{/login}">Login
-								here</a></span>
+                    <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
                 </div>
 
             </form>
@@ -122,15 +125,18 @@
     </div>
 </div>
 
-<script type="text/javascript"
-        th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
-<script type="text/javascript"
-        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
 
 <script>
     $('.input-group.date').datepicker({
+        format: 'dd/mm/yyyy',
+        weekStart: 1,
         autoclose: true,
         todayHighlight: true
     });

@@ -28,6 +28,6 @@ public class UserDTO {
 
     private String password;
 
-    @JsonFormat(pattern = "dd.MM.yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date birthdate;
 }

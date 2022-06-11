@@ -53,8 +53,6 @@ public class UserServiceImplementation implements UserService {
         user.setFirstName(userDTO.getFirstName());
         user.setPassword(userDTO.getPassword());
         user.setBirthdate(userDTO.getBirthdate());
-        user.setEmail(userDTO.getEmail());
-
         userRepository.save(user);
     }
 
@@ -67,6 +65,7 @@ public class UserServiceImplementation implements UserService {
         userDTO.setPassword(user.getPassword());
         userDTO.setLastName(user.getLastName());
         userDTO.setFirstName(user.getFirstName());
+        userDTO.setBirthdate(user.getBirthdate());
 
         return userDTO;
     }
