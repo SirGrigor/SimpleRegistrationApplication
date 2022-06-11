@@ -3,6 +3,7 @@ package com.registration.entain.controller;
 import com.registration.entain.domain.User;
 import com.registration.entain.dto.UserDTO;
 import com.registration.entain.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +14,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/registration")
-
+@AllArgsConstructor
 public class RegistrationController {
 
     @Autowired
     private UserService userService;
+
+    private Validator validator;
 
     @ModelAttribute("user")
     public UserDTO userRegistrationDto() {
@@ -32,10 +35,19 @@ public class RegistrationController {
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") UserDTO userDto, BindingResult result){
 
-        User existing = userService.findByEmail(userDto.getEmail());
-        if (existing != null){
+        if (validator.checkEmailExists(userDto.getEmail())){
             result.rejectValue("email", null, "There is already an account registered with that email");
-        } else if (result.hasErrors()){
+        }
+
+        if (!validator.checkEmail(userDto.getEmail(), userDto.getConfirmEmail())){
+            result.rejectValue("confirmEmail", null, "Emails doest not match");
+        }
+
+        if (!validator.checkPassword(userDto.getPassword(), userDto.getConfirmPassword())){
+            result.rejectValue("confirmPassword", null, "Passwords doest not match");
+        }
+
+        if (result.hasErrors()){
             return "registration";
         }
 

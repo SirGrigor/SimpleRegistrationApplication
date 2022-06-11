@@ -34,7 +34,12 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public User save(UserDTO userDTO) {
+    public Boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public void save(UserDTO userDTO) {
         User user = new User();
         user.setEmail(userDTO.getEmail());
         user.setBirthdate(userDTO.getBirthdate());
@@ -43,7 +48,7 @@ public class UserServiceImplementation implements UserService {
         user.setLastName(userDTO.getLastName());
         user.setRoles(List.of(new Role("ROLE_USER")));
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override

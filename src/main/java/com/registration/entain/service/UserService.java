@@ -4,13 +4,13 @@ import com.registration.entain.domain.User;
 import com.registration.entain.dto.UserDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.util.List;
-
 public interface UserService extends UserDetailsService {
 
     User findByEmail(String email);
 
-    User save(UserDTO UserDTO);
+    Boolean existsByEmail(String email);
+
+    void save(UserDTO UserDTO);
 
     void updateUser(Long id, UserDTO userDTO);
 
