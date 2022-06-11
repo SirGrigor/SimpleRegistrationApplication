@@ -28,7 +28,7 @@ public class UserController {
         String getCurrentLoggedUserName = userService.getCurrentLoggedInUser();
         Long userId = userService.findByEmail(getCurrentLoggedUserName).getId();
         userService.updateUser(userId, userDto);
-        return "redirect:/";
+        return "redirect:/?success";
     }
 
 }

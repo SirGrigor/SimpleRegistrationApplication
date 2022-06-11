@@ -21,8 +21,8 @@
             <a class="navbar-brand" href="#" th:href="@{/registration}">Registration</a>
         </div>
         <div class="fixed-top ui-corner-left">
-            <button type="button" class="btn btn-default btn-sm">
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a>
+            <button type="button" class="btn btn-default btn-sm" sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}">Logout</a>
             </button>
         </div>
     </div>
