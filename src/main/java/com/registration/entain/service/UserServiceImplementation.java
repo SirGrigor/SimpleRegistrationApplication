@@ -47,7 +47,6 @@ public class UserServiceImplementation implements UserService {
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setRoles(List.of(new Role("ROLE_USER")));
-
         userRepository.save(user);
     }
 
@@ -56,7 +55,7 @@ public class UserServiceImplementation implements UserService {
         User user = userRepository.findUserById(id);
         user.setLastName(userDTO.getLastName());
         user.setFirstName(userDTO.getFirstName());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword((userDTO.getPassword()));
         user.setBirthdate(userDTO.getBirthdate());
         userRepository.save(user);
     }
@@ -71,7 +70,6 @@ public class UserServiceImplementation implements UserService {
         userDTO.setLastName(user.getLastName());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setBirthdate(user.getBirthdate());
-
         return userDTO;
     }
 
@@ -80,6 +78,12 @@ public class UserServiceImplementation implements UserService {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         return ((UserDetails) authentication.getPrincipal()).getUsername();
+    }
+
+    @Override
+    public Long getUserIdByLoggedUser() {
+        String getCurrentLoggedUserName = getCurrentLoggedInUser();
+        return findByEmail(getCurrentLoggedUserName).getId();
     }
 
     @Override

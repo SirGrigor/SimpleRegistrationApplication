@@ -1,14 +1,15 @@
-package com.registration.entain.controller;
+package com.registration.entain.service;
 
 
 import com.registration.entain.service.UserService;
+import com.registration.entain.service.ValidatorInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
-@Component
-public class Validator implements RegistrationValidation {
+@Service
+public class Validator implements ValidatorInterface {
 
     @Autowired
     private UserService userService;

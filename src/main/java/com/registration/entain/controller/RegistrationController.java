@@ -1,8 +1,8 @@
 package com.registration.entain.controller;
 
-import com.registration.entain.domain.User;
 import com.registration.entain.dto.UserDTO;
 import com.registration.entain.service.UserService;
+import com.registration.entain.service.Validator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/registration")
@@ -33,21 +33,24 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") UserDTO userDto, BindingResult result){
+    public String registerUserAccount(@ModelAttribute("user") UserDTO userDto, BindingResult result) {
 
-        if (validator.checkEmailExists(userDto.getEmail())){
+        if (validator.checkEmailExists(userDto.getEmail())) {
             result.rejectValue("email", null, "There is already an account registered with that email");
         }
-
-        if (!validator.checkEmail(userDto.getEmail(), userDto.getConfirmEmail())){
+        if (!validator.checkEmail(userDto.getEmail(), userDto.getConfirmEmail())) {
             result.rejectValue("confirmEmail", null, "Emails doest not match");
         }
-
-        if (!validator.checkPassword(userDto.getPassword(), userDto.getConfirmPassword())){
+        if (!validator.checkPassword(userDto.getPassword(), userDto.getConfirmPassword())) {
             result.rejectValue("confirmPassword", null, "Passwords doest not match");
         }
-
-        if (result.hasErrors()){
+        if (Objects.equals(userDto.getEmail(), "")) {
+            result.rejectValue("email", null, "Email cannot be empty");
+        }
+        if (Objects.equals(userDto.getPassword(), "")) {
+            result.rejectValue("password", null, "Password cannot be empty");
+        }
+        if (result.hasErrors()) {
             return "registration";
         }
 

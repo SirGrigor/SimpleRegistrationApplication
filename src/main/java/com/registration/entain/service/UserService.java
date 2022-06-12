@@ -18,4 +18,6 @@ public interface UserService extends UserDetailsService {
 
     String getCurrentLoggedInUser();
 
+    Long getUserIdByLoggedUser();
+
 }

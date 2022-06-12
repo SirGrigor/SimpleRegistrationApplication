@@ -27,11 +27,30 @@
         </div>
     </div>
 </nav>
-<form th:action="@{/}" th:object="${user}" method="get">
-    <div class="container">
-        <h3>Hello there:
-            <td th:text="${user.email}">E-mail</td>
-        </h3>
+<form th:action="@{/index}" th:object="${user}" method="get">
+
+    <div class="col-lg-10 mt-5 mb-5">
+        <h3>User information</h3>
+        <table id="userData" class="table table-bordered" style="width: 100%">
+            <thead>
+            <tr>
+                <th >First Name</th>
+                <th>Last Name</th>
+                <th>Birthday</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th th:text="${user.firstName}"></th>
+                <th th:text="${user.lastName}">Position</th>
+                <th th:text="${user.birthdate}">Office</th>
+                <th th:text="${user.email}">Start date</th>
+                <th th:text="${user.password}">Salary</th>
+            </tr>
+            </tfoot>
+        </table>
     </div>
 
 
@@ -43,7 +62,6 @@
             <div th:if="${param.success}">
                 <div class="alert alert-info">You've successfully updated User!</div>
             </div>
-
 
             <h3>Would you like to edit your personal data?</h3>
             <form action="#" th:action="@{/index}" th:object="${user}" method="post">
@@ -90,6 +108,7 @@
                        th:each="error : ${#fields.errors('password')}"
                        th:text="${error}">Validation error</p>
                 </div>
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>

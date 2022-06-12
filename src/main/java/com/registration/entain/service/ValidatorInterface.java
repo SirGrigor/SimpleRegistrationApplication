@@ -1,6 +1,6 @@
-package com.registration.entain.controller;
+package com.registration.entain.service;
 
-public interface RegistrationValidation {
+public interface ValidatorInterface {
 
     Boolean checkPassword(String password, String confirmedPassword);
 
