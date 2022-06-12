@@ -7,18 +7,12 @@
     <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-
-    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
-    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
-    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/>
-
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#" th:href="@{/index}">Registration and Login Module</a>
+            <a class="navbar-brand" href="#" th:href="@{/index}">Login Module</a>
         </div>
         <div class="fixed-top ui-corner-left">
             <button type="button" class="btn btn-default btn-sm" sec:authorize="isAuthenticated()">
@@ -123,15 +117,6 @@
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
 
-<script>
-    $('.input-group.date').datepicker({
-        format: 'dd/mm/yyyy',
-        weekStart: 1,
-        autoclose: true,
-        todayHighlight: true
-    });
-</script>
 </body>
 </html>

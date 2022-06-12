@@ -55,7 +55,7 @@ public class UserServiceImplementation implements UserService {
         User user = userRepository.findUserById(id);
         user.setLastName(userDTO.getLastName());
         user.setFirstName(userDTO.getFirstName());
-        user.setPassword((userDTO.getPassword()));
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setBirthdate(userDTO.getBirthdate());
         userRepository.save(user);
     }
